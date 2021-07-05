@@ -1,0 +1,1 @@
+obj-$(CONFIG_VIRTUALIO) += virtualio.o
