@@ -21,7 +21,7 @@
             "args": [
                 "-g",
                 "-std=c++11",
-                "${file}",
+                "${fileDirname}\\*.cpp",
                 "-o",
                 "${workspaceRoot}\\${fileBasenameNoExtension}.exe"
             ],
@@ -41,8 +41,8 @@
                 }
             },
             "group": {
-                "_id": "build",
-                "isDefault": false
+                "kind": "build",
+                "isDefault": true
             }
         }
     ]

@@ -7,7 +7,7 @@
             "command": "gcc",　　//c文件就用gcc，cpp文件就用g++
             "args": [
                 "-g",
-                "${file}",
+                "${fileDirname}\\*.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
