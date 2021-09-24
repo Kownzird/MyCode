@@ -85,7 +85,7 @@ void addPerson(struct AddressBook* abs)
 
 
 //显示联系人
-void showPerson(struct AddressBook* abs)
+void showPerson(const struct AddressBook* abs)
 {
 	if(abs->size == 0)
 	{
@@ -109,7 +109,7 @@ void showPerson(struct AddressBook* abs)
 
 
 //检测联系人是否存在
-int isExist(struct AddressBook* abs, string name)
+int isExist(const struct AddressBook* abs, string name)
 {
 	if(abs->size != 0)
 	{
@@ -150,7 +150,7 @@ void deletePerson(struct AddressBook* abs, string name)
 
 
 //查找联系人
-void findPerson(struct AddressBook* abs, string name)
+void findPerson(const struct AddressBook* abs, string name)
 {
 	int index = isExist(abs,name);
 	if(index != -1)
