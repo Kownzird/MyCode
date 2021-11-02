@@ -46,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
     toolbar->setAllowedAreas(Qt::LeftToolBarArea|Qt::RightToolBarArea);
 
     //设置浮动
-    toolbar->setFloatable(false);
+    toolbar->setFloatable(true);
 
     //设置移动 （总开关）
     toolbar->setMovable(false);
@@ -76,6 +76,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     QLabel* label2 = new QLabel("右侧提示信息",this);
     stbar->addPermanentWidget(label2);
+
+
 
 
     //铆接部件(浮动窗口)，可以有多个

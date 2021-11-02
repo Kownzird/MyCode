@@ -32,6 +32,7 @@ Widget::Widget(QWidget *parent)
     ui->comboBox->addItem("奔驰");
     ui->comboBox->addItem("宝马");
     ui->comboBox->addItem("拖拉机");
+    ui->comboBox->setCurrentText("宝马");
 
     //点击按钮，选中拖拉机选项
     connect(ui->btn_select, &QPushButton::clicked,[=](){

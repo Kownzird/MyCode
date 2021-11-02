@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="page_4">
     <widget class="QScrollArea" name="scrollArea">
@@ -43,8 +43,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>128</width>
-        <height>386</height>
+        <width>132</width>
+        <height>331</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -148,7 +148,7 @@
         <x>0</x>
         <y>0</y>
         <width>211</width>
-        <height>56</height>
+        <height>65</height>
        </rect>
       </property>
       <attribute name="label">
@@ -174,7 +174,7 @@
         <x>0</x>
         <y>0</y>
         <width>211</width>
-        <height>56</height>
+        <height>65</height>
        </rect>
       </property>
       <attribute name="label">
@@ -195,6 +195,14 @@
       </widget>
      </widget>
      <widget class="QWidget" name="page_3">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>211</width>
+        <height>65</height>
+       </rect>
+      </property>
       <attribute name="label">
        <string>黑名单</string>
       </attribute>
@@ -225,7 +233,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -396,8 +404,8 @@
   <widget class="QSlider" name="horizontalSlider">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>390</y>
+     <x>450</x>
+     <y>380</y>
      <width>160</width>
      <height>22</height>
     </rect>

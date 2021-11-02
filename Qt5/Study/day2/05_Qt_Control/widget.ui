@@ -26,7 +26,7 @@
     <string>海贼旗</string>
    </property>
    <property name="icon">
-    <iconset resource="req.qrc">
+    <iconset>
      <normaloff>:/Image/OnePiece.png</normaloff>:/Image/OnePiece.png</iconset>
    </property>
    <property name="iconSize">
@@ -160,8 +160,6 @@
    </property>
   </widget>
  </widget>
- <resources>
-  <include location="req.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
