@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>image/Chorm.png</file>
+        <file>image/Firefox.png</file>
+        <file>image/IE.png</file>
+        <file>image/Maxthon.png</file>
+        <file>image/Netscape.png</file>
+        <file>image/opera.png</file>
+        <file>image/safari.png</file>
+    </qresource>
+</RCC>
