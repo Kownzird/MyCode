@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QMimeData>
 #include <QDrag>
+#include <QDebug>
 
 DataTableWidget::DataTableWidget(QWidget *parent)
     : QTableWidget(parent)
@@ -53,7 +54,10 @@ void DataTableWidget::dragMoveEvent(QDragMoveEvent *event){
 void DataTableWidget::dropEvent(QDropEvent *event){
     if(event->mimeData()->hasFormat("text/csv")){
         QByteArray csvData = event->mimeData()->data("text/csv");
+
+        qDebug() << "dropEvent csvData:" << csvData;
         QString csvText = QString::fromUtf8(csvData);
+        qDebug() << "dropEvent csvText:" << csvText;
         fromCsv(csvText);
         event->acceptProposedAction();
     }
@@ -65,6 +69,7 @@ void DataTableWidget::performDrag(){
     if(selectionString.isEmpty()){
         return;
     }
+    qDebug() << "performDrag selectionString:" << selectionString;
 
     QMimeData *mimeData = new QMimeData;
     mimeData->setHtml(toHtml(selectionString));
@@ -77,6 +82,7 @@ void DataTableWidget::performDrag(){
     if(drag->exec(Qt::CopyAction | Qt::MoveAction) == Qt::MoveAction){
         selectionModel()->clearSelection();
     }
+    qDebug() << "Finish performDrag";
 }
 
 
@@ -86,8 +92,8 @@ QString DataTableWidget::selectionText() const{
     QAbstractItemModel *itemmodel = model();
     QTableWidgetSelectionRange selection = selectedRanges().at(0);
 
-    for(int row = selection.topRow(), firstRow = row; row < selection.bottomRow(); row++){
-        for(int col = selection.leftColumn(); col < selection.rightColumn(); col++){
+    for(int row = selection.topRow(), firstRow = row; row <= selection.bottomRow(); row++){
+        for(int col = selection.leftColumn(); col <= selection.rightColumn(); col++){
             if(row == firstRow){
                 headerString.append(horizontalHeaderItem(col)->text()).append("\t");
             }
@@ -96,8 +102,12 @@ QString DataTableWidget::selectionText() const{
         }
 
         selectionString = selectionString.trimmed();
-        selectionString.append("\t");
+        selectionString.append("\n");
     }
+
+    qDebug() << "selectionString:" << selectionString;
+    qDebug() << "headerString:" << headerString;
+    qDebug() << "return string:" << headerString.trimmed() + "\n" + selectionString.trimmed();
 
     return headerString.trimmed() + "\n" + selectionString.trimmed();
 }
@@ -134,14 +144,22 @@ void DataTableWidget::fromCsv(const QString &csvText)
 {
     QStringList rows = csvText.split("\n");
     QStringList headers = rows.at(0).split(", ");
+
+    qDebug() << "fromCsv rows:" << rows;
+    qDebug() << "fromCsv headers:" << headers;
+
     for (int h = 0; h < headers.size(); ++h) {
-        QString header = headers.at(0);
+        QString header = headers.at(h);
         headers.replace(h, header.replace('"', ""));
     }
+
+    qDebug() << "fromCsv headers handle:" << headers;
+
     setHorizontalHeaderLabels(headers);
     for (int r = 1; r < rows.size(); ++r) {
         QStringList row = rows.at(r).split(", ");
-        setItem(r - 1, 0, new QTableWidgetItem(row.at(0).trimmed().replace('"', "")));
-        setItem(r - 1, 1, new QTableWidgetItem(row.at(1).trimmed().replace('"', "")));
+        for(int c = 0; c < row.size(); c++){
+            setItem(r - 1, c, new QTableWidgetItem(row.at(c).trimmed().replace('"', "")));
+        }
     }
 }
