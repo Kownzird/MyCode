@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QClipboard>
 #include <QApplication>
+#include <QMessageBox>
 
 ClipboardDemo::ClipboardDemo(QWidget *parent)
     : QWidget(parent){
@@ -42,7 +43,9 @@ void ClipboardDemo::setClipboardContent(){
 
 
 void ClipboardDemo::getClipboardContent(){
-
+    QClipboard *board = QApplication::clipboard();
+    QString str = board->text();
+    QMessageBox::information(this, "From clipboard", str);
 }
 
 
