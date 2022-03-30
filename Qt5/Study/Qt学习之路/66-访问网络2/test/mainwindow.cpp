@@ -102,7 +102,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), d(new MainWindow:
                 cityNameLabel->setText(weather.cityName());
                 dateTimeLabel->setText(weather.dateTime().toString(Qt::DefaultLocaleLongDate));
                 temperatureLabel->setText(QString("%1°C").arg(weather.temperature()));
-//                descLabel->setText(weather.details["description"]);
+                descLabel->setText(weather.details()[0]->desc());
 
             }
         }else{
