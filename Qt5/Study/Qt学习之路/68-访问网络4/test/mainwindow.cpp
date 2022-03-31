@@ -13,6 +13,7 @@
 #include <QDateTime>
 #include <QMessageBox>
 #include <QMap>
+#include <QEventLoop>
 #include <QDebug>
 
 class MainWindow::Private
@@ -22,17 +23,31 @@ public:
         netWorker = NetWorker::instance();
     }
 
-    //在原有的fetchWeather()和新增的fetchIcon()函数中都将NetWorker::get()函数的返回值保存下来
+    //当QNetworkAccessManager发出请求之后，我们进入一个新的事件循环，将操作进行阻塞
+    //防止连续访问网络，第一次放回结果较慢，导致第二次结果比第一次先到，而后再次刷新显示第一次结果
     void fetchWeather(const QString &cityName){
+        QEventLoop eventLoop;
+        connect(netWorker, &NetWorker::finished, &eventLoop, &QEventLoop::quit);
+
+
         QNetworkReply *reply = netWorker->get(QString(
             "https://api.openweathermap.org/data/2.5/weather?q=%1,cn&mode=json&units=metric&lang=zh_cn&"
             "APPID=261df16dd00c9ce47eaa0e3540409eb5").arg(cityName));
         replyMap.insert(reply, FetchWeatherInfo);
+
+        //网络访问为异步操作
+        qDebug() << "eventLoop exec";
+        eventLoop.exec();
     }
 
     void fetchIcon(const QString &iconName){
+        QEventLoop eventLoop;
+        connect(netWorker, &NetWorker::finished, &eventLoop, &QEventLoop::quit);
+
         QNetworkReply *reply = netWorker->get(QString("https://openweathermap.org/img/w/%1.png").arg(iconName));
         replyMap.insert(reply, FetchWeatherIcon);
+
+        eventLoop.exec();
     }
 
     NetWorker *netWorker;
