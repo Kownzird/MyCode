@@ -18,11 +18,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    workthread.cpp
+    mythread.cpp
 
 HEADERS += \
     mainwindow.h \
-    workthread.h
+    mythread.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
