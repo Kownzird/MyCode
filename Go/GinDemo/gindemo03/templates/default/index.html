@@ -6,12 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/static/css/base.css">
 </head>
 <body>
+
+    {{template "public/page_header.html" .}}
+
+    <img src="/static/image/ghost2.jpg" alt="">
+
     <h2>{{.title}}</h2>
 
     <!-- 定义变量 -->
     {{$t := .title}}
+
+    <!-- 移除空格 -->
+    {{- .msg -}}--{{- .msg -}}
 
     <!-- <br>标签换行符 -->
     <br>
@@ -41,9 +50,54 @@
     <!-- 循环遍历数据 -->
     <ul>
         {{range $key,$value := .hobby}}
-            <li>{{$value}}</li>
+            <li>{{$key}}---{{$value}}</li>
         {{end}}
     </ul>
+
+    <br>
+
+    <ul>
+        {{range $key,$value := .newsList}}
+            <li>{{$key}}---{{$value.Title}}---{{$value.Content}}</li>
+        {{end}}
+    </ul>
+
+    <br>
+
+    <ul>
+        {{range $key,$value := .testSlice}}
+            <li>{{$key}}---{{$value}}</li>
+        {{else}}
+            <li>数组里没有数据</li>
+        {{end}}
+    </ul>
+
+    <!-- with解构结构体 -->
+    <p>{{.news.Title}}</p>
+    <p>{{.news.Content}}</p>
+
+    <br>
+
+    {{with .news}}
+        <p>{{.Title}}</p>
+        <p>{{.Content}}</p>
+    {{end}}
+
+
+    <!-- 预定义函数 -->
+    {{len .title}}
+
+    <!-- 自定义模板函数 -->
+    {{.date}}
+
+    <br>
+    {{UnixToTime .date}}
+
+    <br>
+    {{Println .title .msg}}
+
+    <br>
+    {{template "public/page_footer.html" .}}
     
 </body>
 </html>
