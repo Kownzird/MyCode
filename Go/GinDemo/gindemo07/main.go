@@ -20,8 +20,30 @@ func UnixToTime(timestamp int) string {
 	return t.Format("2006-01-02 15:04:05")
 }
 
+//中间件
 func initMiddleware(c *gin.Context) {
-	fmt.Println("aaa")
+	start := time.Now().UnixNano()
+	fmt.Println("1-我是一个中间件")
+
+	//调用该请求的剩余处理程序
+	// c.Next()
+	c.Abort() //不会执行处理函数
+
+	fmt.Println("2-我是一个中间件")
+	end := time.Now().UnixNano()
+	fmt.Println(end - start)
+}
+
+func initMiddlewareOne(c *gin.Context) {
+	fmt.Println("1-我是一个中间件-initMiddlewareOne")
+	c.Next()
+	fmt.Println("2-我是一个中间件-initMiddlewareOne")
+}
+
+func initMiddlewareTwo(c *gin.Context) {
+	fmt.Println("1-我是一个中间件-initMiddlewareTwo")
+	c.Next()
+	fmt.Println("2-我是一个中间件-initMiddlewareTwo")
 }
 
 func main() {
@@ -35,7 +57,12 @@ func main() {
 
 	r.Static("/static", "./static")
 
-	r.GET("/", initMiddleware, func(c *gin.Context) {
+	//全局中间件
+	r.Use(initMiddlewareOne, initMiddlewareTwo)
+
+	r.GET("/", initMiddlewareOne, initMiddlewareTwo, func(c *gin.Context) {
+		fmt.Println("我是首页")
+		time.Sleep(time.Second)
 		c.String(200, "首页")
 	})
 
