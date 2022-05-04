@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"gindemo05/controllers/foreground"
+	"gindemo06/controllers/foreground"
 
 	"github.com/gin-gonic/gin"
 )

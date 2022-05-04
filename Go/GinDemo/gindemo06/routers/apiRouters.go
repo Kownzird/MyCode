@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"gindemo05/controllers/api"
+	"gindemo06/controllers/api"
 
 	"github.com/gin-gonic/gin"
 )

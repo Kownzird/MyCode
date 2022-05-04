@@ -1,4 +1,4 @@
-module gindemo05
+module gindemo06
 
 go 1.14
 

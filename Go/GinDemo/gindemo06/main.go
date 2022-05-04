@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"gindemo05/routers"
+	"gindemo06/routers"
 	"html/template"
 	"time"
 
