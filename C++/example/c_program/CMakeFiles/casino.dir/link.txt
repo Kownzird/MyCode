@@ -1,0 +1,1 @@
+/usr/bin/cc -rdynamic CMakeFiles/casino.dir/casino.c.o -o casino 
