@@ -1,0 +1,23 @@
+CFLAGS = -I./headers -g
+BIN = bst.elf avl.elf
+
+all:$(BIN)
+
+$(BIN):%.elf:%.o drawtree.o queue.o travel.o
+	$(CC) -o $@ $^ $(CFLAGS)
+
+
+queue.o:queue.c
+	$(CC) -o $@ $< -c $(CFLAGS)
+
+travel.o:travel.c
+	$(CC) -o $@ $< -c $(CFLAGS)
+
+bst.o:bst.c
+	$(CC) -o $@ $< -c $(CFLAGS)
+
+clean:
+	$(RM) *.o $(BIN)
+
+distclean:clean
+	$(RM) .*.sw? *html
